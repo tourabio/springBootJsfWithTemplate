@@ -23,6 +23,9 @@ public class ChildCareCenter {
     @JoinColumn(name = "ccc_id" )
     private Set<Employee> employees = new HashSet<>();
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy="childCareCenter",fetch=FetchType.LAZY)
+	private Set<Event> events;
+    
     public ChildCareCenter() {
     }
 
@@ -35,7 +38,19 @@ public class ChildCareCenter {
         this.employees = employees;
     }
 
-    public Long getId() {
+    
+    
+    
+    
+    public Set<Event> getEvents() {
+		return events;
+	}
+
+	public void setEvents(Set<Event> events) {
+		this.events = events;
+	}
+
+	public Long getId() {
         return id;
     }
 

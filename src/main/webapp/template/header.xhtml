@@ -1,0 +1,23 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<h:panelGroup>
+		<br />
+		<br /> <h:panelGroup>
+		
+		<div class="container">
+			<h:form>
+				<h:outputText value="Bonjour #{employeController. authenticatedUser.prenom} #{employeController.authenticatedUser.nom}" />
+|
+<h:commandLink value="Déconnexion"
+					action="#{employeController.doLogout()}" />
+			</h:form>
+							</div>
+			
+		</h:panelGroup> <br />
+		<br />
+		
+	</h:panelGroup>
+</ui:composition>

@@ -3,7 +3,10 @@ package com.example.kidszonea4arctic3.models;
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
+@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")// resoudre le probleme du boucle infini
 @Entity
 public class Parent {
 
