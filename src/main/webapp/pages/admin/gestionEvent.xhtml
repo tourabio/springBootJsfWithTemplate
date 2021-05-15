@@ -35,6 +35,9 @@
 							<td><h:inputText value="#{eventController.e.name}"
 									class="form-control mb-4 "></h:inputText></td>
 						</tr>
+
+						
+
 						<tr>
 							<td><h:outputText value="Date_event(yyyy-MM-dd)"></h:outputText></td>
 							<td><h:inputText value="#{eventController.e.date_event}"
@@ -127,6 +130,18 @@
 						</f:facet>
 						<h:outputText value="#{event.name}" />
 					</h:column>
+
+
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="Image" />
+						</f:facet>
+						<h:graphicImage library="images" name="#{event.image}"
+							height="100" width="100" />
+					</h:column>
+
+
+
 					<h:column>
 						<f:facet name="header">
 							<h:outputText value="Description" />
@@ -162,23 +177,21 @@
 						<f:facet name="header">
 							<h:outputText value="Action" />
 						</f:facet>
-						<h:commandButton action="#{eventController.removeEvent(event.id)}"
-							class="btn btn-danger" value="Delete" />
 
-						<h:commandButton action="#{eventController.updateEvent(event)}"
-							class="btn btn-warning mx-2" value="Update" />
-							
-						<h:commandButton action="#{eventController.participate(event.id)}"
-							class="btn btn-primary mx-2" value="Participate" />
+
+
+
 
 						<div class="d-flex flex-row">
-							<h:inputText value="#{event.rateValue}"
-								class="form-control mb-4 col-3"></h:inputText>
+							<h:commandButton
+								action="#{eventController.removeEvent(event.id)}"
+								class="btn btn-danger" value="Delete" />
 
-							<h:commandButton action="#{eventController.rate(event)}"
-								class="btn btn-light mx-2" value="Rate" />
+							<h:commandButton action="#{eventController.updateEvent(event)}"
+								class="btn btn-warning mx-2" value="Update" />
 
 						</div>
+					
 
 					</h:column>
 

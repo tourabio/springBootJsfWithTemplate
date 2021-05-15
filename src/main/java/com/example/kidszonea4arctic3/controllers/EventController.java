@@ -33,6 +33,32 @@ import com.example.kidszonea4arctic3.services.ChildCareCenterService;
 import com.example.kidszonea4arctic3.services.EventService;
 import com.example.kidszonea4arctic3.services.RateService;
 import com.example.kiszonea4arctic3.utils.FileUploadUtil;
+import com.example.kiszonea4arctic3.utils.Utils;
+
+import javax.servlet.http.Part;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.Serializable;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.ServletContext;
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 @Controller(value = "eventController")
 @ELBeanName(value = "eventController")
@@ -46,7 +72,7 @@ public class EventController {
 	RateService rs;
 	
 	private Event e = new Event();
-
+	private Part file;
 	private List<Event> list;
 	private Category category;
 	private boolean showForm = false;
@@ -59,6 +85,14 @@ public class EventController {
 	
 	
 	
+	public Part getFile() {
+		return file;
+	}
+
+	public void setFile(Part file) {
+		this.file = file;
+	}
+
 	public void showStatistics(){
 		int n = es.retrieveAllEvents(Long.parseLong("1")).size();
 		float  edu = es.searchByCategory(Category.EDUCATIF).size() ;
@@ -175,6 +209,7 @@ public class EventController {
 
 	public void removeEvent(Long id) {
 		es.deleteEvent(id);
+		showAll();
 	}
 
 	public Category getCategory() {
@@ -232,10 +267,39 @@ public class EventController {
 		this.showForm = showForm;
 	}
 
-	public void addEvent() {
+	public void addEvent() throws IOException{
+		/*System.out.println("enter addEvent ...");
+		InputStream inputStream = null;
+		OutputStream outputStream = null;
+		FacesContext context = FacesContext.getCurrentInstance();
+		ServletContext servletContext = (ServletContext) context.getExternalContext().getContext();
+		String path = servletContext.getRealPath("");
+		boolean file1Success = false;
+		String fileName = "event.jpg";
+		if (file.getSize() > 0) {
+			 fileName = Utils.getFileNameFromPart(file);
+			
+			File outputFile = new File(path + File.separator + "resources" + File.separator +"images" + File.separator + fileName);
+			inputStream = file.getInputStream();
+			outputStream = new FileOutputStream(outputFile);
+			byte[] buffer = new byte[1024];
+			int bytesRead = 0;
+			while ((bytesRead = inputStream.read(buffer)) != -1) {
+				outputStream.write(buffer, 0, bytesRead);
+			}
+			if (outputStream != null) {
+				outputStream.close();
+			}
+			if (inputStream != null) {
+				inputStream.close();
+			}
+			file1Success = true;
+		}
+		*/
+		
 		ChildCareCenter cc = js.retrieveJardin((long) 1).get();
 		e.setChildCareCenter(cc);
-		//e.setImage("static.jpg");
+		e.setImage("event.jpg");
 		System.out.println(e);
 		es.addEvent(e);
 		showAll();
